@@ -11,6 +11,9 @@ from keras.layers import Activation
 from keras.layers import BatchNormalization as BatchNorm
 from keras.utils import np_utils
 from keras.callbacks import ModelCheckpoint
+import os, sys
+
+upload_dir = ""
 
 def train_network():
     """ Train a Neural Network to generate music """
@@ -29,7 +32,7 @@ def get_notes():
     """ Get all the notes and chords from the midi files in the ./midi_songs directory """
     notes = []
 
-    for file in glob.glob("midi_songs/*.mid"): #loop through all the files
+    for file in glob.glob("{}/*.mid".format(upload_dir)): #loop through all the files
         midi = converter.parse(file)
 
         print("Parsing %s" % file)
@@ -122,4 +125,6 @@ def train(model, network_input, network_output):
     model.fit(network_input, network_output, epochs=200, batch_size=128, callbacks=callbacks_list)
 
 if __name__ == '__main__':
+    global upload_dir = sys.argv[1]
+    os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
     train_network()

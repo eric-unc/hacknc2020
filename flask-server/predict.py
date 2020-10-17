@@ -7,6 +7,8 @@ from keras.layers import Dropout
 from keras.layers import LSTM
 from keras.layers import BatchNormalization as BatchNorm
 from keras.layers import Activation
+import os
+
 
 def generate():
     """ Generate a piano midi file """
@@ -133,4 +135,5 @@ def create_midi(prediction_output):
     midi_stream.write('midi', fp='test_output200.mid')
 
 if __name__ == '__main__':
+    os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
     generate()
