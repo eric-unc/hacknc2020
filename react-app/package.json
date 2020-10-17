@@ -1,7 +1,7 @@
 {
-  "name": "hacknc2020",
-  "version": "0.1.0",
-  "private": true,
+  "name": "mad-muzzic",
+  "version": "0.0.0",
+  "private": false,
   "dependencies": {
     "@babel/core": "7.9.0",
     "@svgr/webpack": "4.3.3",
@@ -47,7 +47,6 @@
     "postcss-safe-parser": "4.0.1",
     "react": "^16.14.0",
     "react-app-polyfill": "^1.0.6",
-    "react-bulma-components": "^3.4.0",
     "react-dev-utils": "^10.2.1",
     "react-dom": "^16.14.0",
     "resolve": "1.15.0",
