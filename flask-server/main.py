@@ -7,7 +7,7 @@ timing = 0
 name = ""
 
 time_stamp = datetime.datetime.now().strftime("%m%d%Y%H%M%S")
-UPLOAD_DIRECTORY = f'./upload/{time_stamp}'
+UPLOAD_DIRECTORY = f'./upload/'
 
 if not os.path.exists(UPLOAD_DIRECTORY):
     os.makedirs(UPLOAD_DIRECTORY)
@@ -38,8 +38,8 @@ def post_file():
         file.save(os.path.join(UPLOAD_DIRECTORY, filename))
     # post time
     try:
-        os.system(f'unzip ./{UPLOAD_DIRECTORY}/*.zip')
-        os.system(f'rm -rf ./{UPLOAD_DIRECTORY}/*.zip')
+        os.system(f'unzip ./upload/*.zip')
+        os.system(f'rm -rf .//*.zip')
     except e:
         print(e)
     timing = request.form['time']           # should be same as name field in <input>
@@ -48,13 +48,13 @@ def post_file():
 
 @app.route("/begin-transfer", methods = ['GET','POST'])
 def begin_transfer():
-    os.system(f'python3 ./lstm.py {UPLOAD_DIRECTORY} {timing}')
-    os.system(f'python3 ./predict.py {UPLOAD_DIRECTORY}')
+    os.system(f'python3 ./lstm.py {timing}')
+    os.system(f'python3 ./predict.py')
     return
 
 # Download file
 @app.route("/get-file", methods = ['GET','POST'])
 def get_file():
-    return send_file(f'./result/result_{time_stamp}', attachment_filename = 'result.mid')
+    return send_file(f'./result/result.mid', attachment_filename = 'result.mid')
 
 app.run(host="0.0.0.0", port=80, debug=True)
