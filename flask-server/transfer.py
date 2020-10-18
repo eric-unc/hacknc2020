@@ -4,6 +4,7 @@ from werkzeug.utils import secure_filename
 import datetime
 
 timing = 0
+name = ""
 
 time_stamp = datetime.datetime.now().strftime("%m%d%Y%H%M%S")
 UPLOAD_DIRECTORY = f'./{time_stamp}'
@@ -21,7 +22,7 @@ if not os.path.exists("./temp"):
 
 os.system("rm -rf ./temp/*")
 
-ALLOWED_EXTENSIONS = {'mid'}
+ALLOWED_EXTENSIONS = {'mid', 'zip'}
 api = Flask(__name__)
 
 # Upload file with name = "example-name"
@@ -34,7 +35,10 @@ def post_file():
     if file:
         file.save(os.path.join(UPLOAD_DIRECTORY, filename))
     # post time
+    os.system(f'unzip ./{UPLOAD_DIRECTORY}/*.zip')
+    os.system(f'rm -rf ./{UPLOAD_DIRECTORY}/*.zip')
     timing = request.form['time']           # should be same as name field in <input>
+    name = request.form['username']
     return #return webpage or something here after upload
 
 @api.route("/begin-transfer", methods = ['GET','POST'])
