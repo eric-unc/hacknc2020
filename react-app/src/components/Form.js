@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import '../App.css';
+import fileDownload from 'js-file-download';
 
 const suggestedSong = "Song of the Sea";
 const defaultMinutes = "3";
@@ -61,7 +62,7 @@ export default class Form extends Component {
         event.preventDefault();
 
         console.log("Submitting call")
-        if(this.isInputValid()){ // Want to ignore possible DOM screwups and hacks
+        if(this.isInputValid()) { // Want to ignore possible DOM screwups and hacks
             this.setState({isLoading: true})
 
             const formData = new FormData();
@@ -83,11 +84,16 @@ export default class Form extends Component {
                 console.log(res);
             })
 
-            axios.post("./get-file").then((res) => {
+            let file = null;
 
+            axios.post("./get-file", {responseType: 'blob'}).then((res) => {
+                file = res.data;
             });
 
-            //this.setState({isLoading: false})
+            if (file != null){
+                this.setState({isLoading: false});
+                fileDownload(file, this.state.name);
+            }
         }
     }
 
