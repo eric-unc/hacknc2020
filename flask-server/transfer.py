@@ -15,10 +15,10 @@ if not os.path.exists("./result"):
 ALLOWED_EXTENSIONS = {'mid'}
 api = Flask(__name__)
 
-# Upload file with name = "postFile"
+# Upload file with name = "example-name"
 @api.route("/post-file", methods = ['POST'])
 def post_file():
-    file = request.files['']
+    file = request.files['example-name']    # should be same as name field in <input>
     filename = secure_filename(file.filename)
     if file:
         file.save(os.path.join(UPLOAD_DIRECTORY, filename))
