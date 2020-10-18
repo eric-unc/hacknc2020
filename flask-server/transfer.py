@@ -40,7 +40,7 @@ def post_file():
 @api.route("/begin-transfer", methods = ['GET','POST'])
 def begin_transfer():
     os.system(f'python3 ./lstm.py {UPLOAD_DIRECTORY} {timing}')
-    os.system(f'python3 ./predict.py')
+    os.system(f'python3 ./predict.py {UPLOAD_DIRECTORY}')
     return
 
 # Download file

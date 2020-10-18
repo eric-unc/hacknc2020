@@ -7,7 +7,9 @@ from keras.layers import Dropout
 from keras.layers import LSTM
 from keras.layers import BatchNormalization as BatchNorm
 from keras.layers import Activation
-import os
+import os, sys
+
+upload_dir = ""
 
 
 def generate():
@@ -104,6 +106,7 @@ def generate_notes(model, network_input, pitchnames, n_vocab):
     return prediction_output
 
 def create_midi(prediction_output):
+    global upload_dir
     """ convert the output from the prediction to notes and create a midi file
         from the notes """
     offset = 0
@@ -134,8 +137,9 @@ def create_midi(prediction_output):
 
     midi_stream = stream.Stream(output_notes)
 
-    midi_stream.write('midi', fp='./result/test_output200.mid')
+    midi_stream.write('midi', fp='./result/result_{}.mid'.format(upload_dir))
 
 if __name__ == '__main__':
     os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
+    upload_dir = sys.argv[1]
     generate()

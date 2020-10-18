@@ -129,6 +129,6 @@ def train(model, network_input, network_output):
 
 if __name__ == '__main__':
     upload_dir = sys.argv[1]
-    timing = int (sys.argv[2])
+    timing = int(sys.argv[2])
     os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
     train_network()
