@@ -40,7 +40,7 @@ def post_file():
     os.system(f'unzip ./{UPLOAD_DIRECTORY}/*.zip')
     os.system(f'rm -rf ./{UPLOAD_DIRECTORY}/*.zip')
     timing = request.form['time']           # should be same as name field in <input>
-    name = request.form['username']
+    name = request.form['name'] # This should be the name of the song ideally
     return #return webpage or something here after upload
 
 @app.route("/begin-transfer", methods = ['GET','POST'])

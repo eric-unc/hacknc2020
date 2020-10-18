@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 import '../App.css';
 
 const suggestedSong = "Song of the Sea";
@@ -52,10 +53,32 @@ export default class Form extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        console.log(`Selected file - ${this.fileInput.current.files[0].name}`);
 
+        console.log("About to test this!")
         if(this.isInputValid()){ // Want to ignore possible DOM screwups and hacks
-            // TODO: call api
+            console.log("")
+            const formData = new FormData();
+
+            formData.append('name', this.state.name);
+            formData.append('time', this.state.minutes);
+
+            formData.append(
+                "example-name", // TODO: change name?
+                this.fileInput,
+                this.fileInput.name
+            );
+
+            axios.post("./post-file", formData).then((res) => {
+                console.log(res);
+            });
+
+            axios.post("./begin-transfer").then((res) => {
+                console.log(res);
+            })
+
+            axios.post("./get-file").then((res) => {
+                console.log(res);
+            });
         }
     }
 
@@ -78,7 +101,9 @@ export default class Form extends Component {
                         </div>
 
                         <div className="field">
-                            <label className="label">Minutes (1-200)</label>
+                            <label className="label">Minutes (1-200).
+                                Note this is a prediction, it may be faster or slower depending on how
+                                the server is doing.</label>
                             <div className="control">
                                 <input
                                     className="input"
@@ -90,7 +115,7 @@ export default class Form extends Component {
                         </div>
 
                         <div className="field">
-                            <label className="label">Input</label>
+                            <label className="label">Input (must be a <code>mid</code> file)</label>
                             <div className="file is-primary">
                                 <input
                                     type="file"
