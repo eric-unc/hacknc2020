@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import '../App.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const suggestedSong = "Song of the Sea";
 const defaultMinutes = "3";
@@ -14,6 +15,7 @@ export default class Form extends Component {
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.fileInput = React.createRef();
     }
 
     handleInputChange(event) {
@@ -27,7 +29,8 @@ export default class Form extends Component {
     }
 
     handleSubmit(event) {
-        console.log(this.state);
+        event.preventDefault();
+        console.log(this.state); // TODO: call api
     }
 
     render(){
@@ -62,19 +65,19 @@ export default class Form extends Component {
                         <div className="field">
                             <label className="label">Input</label>
                             <div className="file is-primary">
-                                <input className="file-input" type="file" name="music" />
+                                <input className="file-input" type="file" ref={this.fileInput}/>
                                 <span className="file-cta">
-                                    <span className="file-icon">
-                                        <i className="fas fa-upload"></i>
+
+                                    <span className="file-label">
+                                        <FontAwesomeIcon icon="upload"/> Choose a file…
                                     </span>
-                                    <span className="file-label">Input</span>
                                 </span>
                             </div>
                         </div>
 
                         <div class="field">
                             <div className="control">
-                                <button className="button is-link">Submit</button>
+                                <button className="button is-link" type="submit">Submit</button>
                             </div>
                         </div>
                     </form>
