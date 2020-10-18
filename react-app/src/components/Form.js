@@ -19,15 +19,10 @@ export default class Form extends Component {
 
     isInputValid(){
         // this is hacky af but works lol
-        let ret = this.state.name.length >= 4 &&
+        let ret = this.state.name.match(/^[ \w\d]+$/) &&
             this.state.minutes >= 1 && this.state.minutes <= 200 && this.state.minutes.match(/^\d{1,3}$/);
 
-        console.log("Name: " + this.state.name)
-        console.log("Length: " + this.state.name.length)
-        console.log("over 4: " + (this.state.name.length >= 4));
-        console.log("mins in range: " + (this.state.minutes >= 1 && this.state.minutes <= 200));
-        console.log("match: " + this.state.minutes.match(/^\d{1,3}$/))
-        console.log("checked: " + ret);
+        console.log("Name: " + this.state.name);
         return ret;
     }
 
@@ -49,6 +44,10 @@ export default class Form extends Component {
         // TODO: call api
         event.preventDefault();
         console.log(`Selected file - ${this.fileInput.current.files[0].name}`);
+
+        if(this.isInputValid()){ // Want to ignore possible DOM screwups and hacks
+
+        }
     }
 
     render(){
@@ -57,7 +56,7 @@ export default class Form extends Component {
                 <div className="container">
                     <form className="box" onSubmit={this.handleSubmit}>
                         <div className="field">
-                            <label className="label">Name</label>
+                            <label className="label">Name (must be a valid file identifier)</label>
                             <div className="control">
                                 <input
                                     className="input"
@@ -77,8 +76,7 @@ export default class Form extends Component {
                                     type="text"
                                     name="minutes"
                                     value={this.state.minutes}
-                                    onChange={this.handleInputChange}
-                                    /*placeholder={defaultMinutes}*//>
+                                    onChange={this.handleInputChange}/>
                             </div>
                         </div>
 
