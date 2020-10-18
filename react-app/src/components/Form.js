@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import '../App.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const suggestedSong = "Song of the Sea";
 const defaultMinutes = "3";
@@ -65,13 +64,7 @@ export default class Form extends Component {
                         <div className="field">
                             <label className="label">Input</label>
                             <div className="file is-primary">
-                                <input className="file-input" type="file" ref={this.fileInput}/>
-                                <span className="file-cta">
-
-                                    <span className="file-label">
-                                        <FontAwesomeIcon icon="upload"/> Choose a file…
-                                    </span>
-                                </span>
+                                <input type="file" ref={this.fileInput}/>
                             </div>
                         </div>
 

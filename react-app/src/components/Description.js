@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
 import '../App.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default class Description extends Component {
     render(){
         return (
             <section className="section">
                 <div className="content">
-                    <FontAwesomeIcon icon="coffee" />
                     <p>Want custom music generated for free? Give us up to 10 midi files and we will put them through a LSTM
                         (Long Short-Term Memory) neural network. Give your beats a name, and tell us how long you want the
                         network to train. We recommend training as long as possible, preferably for 30 minutes or more. We also recommend
