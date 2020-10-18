@@ -136,5 +136,8 @@ if __name__ == '__main__':
     upload_dir = sys.argv[1]
     os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
     f = open("./log", "a")
-    train_network()
+    try:
+        train_network()
+    except KeyboardInterrupt:
+        f.close()
     f.close()
