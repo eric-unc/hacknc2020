@@ -9,12 +9,15 @@ name = ""
 time_stamp = datetime.datetime.now().strftime("%m%d%Y%H%M%S")
 UPLOAD_DIRECTORY = f'./{time_stamp}'
 
+<<<<<<< HEAD
 # f = open("./log")
 log_path = "./log"
 if not os.path.exists(log_path):
     open(log_path, "w+").close() # TODO: possibly simplify
 
 f = open(log_path)
+=======
+>>>>>>> d9b46e4eabe096039a7592d2aa70988727f33a7f
 
 if not os.path.exists(UPLOAD_DIRECTORY):
     os.makedirs(UPLOAD_DIRECTORY)
