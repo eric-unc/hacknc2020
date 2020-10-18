@@ -7,9 +7,14 @@ timing = 0
 name = ""
 
 time_stamp = datetime.datetime.now().strftime("%m%d%Y%H%M%S")
-UPLOAD_DIRECTORY = f"./{time_stamp}"
+UPLOAD_DIRECTORY = f'./{time_stamp}'
 
-f = open("./log")
+# f = open("./log")
+log_path = "./log"
+if not os.path.exists(log_path):
+    open(log_path, "w+").close() # TODO: possibly simplify
+
+f = open(log_path)
 
 if not os.path.exists(UPLOAD_DIRECTORY):
     os.makedirs(UPLOAD_DIRECTORY)

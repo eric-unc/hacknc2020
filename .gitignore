@@ -133,4 +133,5 @@ yarn-error.log*
 # Build
 flask-server/static/
 flask-server/templates/
+flask-server/log
 
