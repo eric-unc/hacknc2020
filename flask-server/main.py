@@ -37,8 +37,11 @@ def post_file():
     if file:
         file.save(os.path.join(UPLOAD_DIRECTORY, filename))
     # post time
-    os.system(f'unzip ./{UPLOAD_DIRECTORY}/*.zip')
-    os.system(f'rm -rf ./{UPLOAD_DIRECTORY}/*.zip')
+    try:
+        os.system(f'unzip ./{UPLOAD_DIRECTORY}/*.zip')
+        os.system(f'rm -rf ./{UPLOAD_DIRECTORY}/*.zip')
+    except e:
+        print(e)
     timing = request.form['time']           # should be same as name field in <input>
     name = request.form['name'] # This should be the name of the song ideally
     return #return webpage or something here after upload
