@@ -22,6 +22,8 @@ export default class Form extends Component {
         let ret = this.state.name.length >= 4 &&
             this.state.minutes >= 1 && this.state.minutes <= 200 && this.state.minutes.match(/^\d{1,3}$/);
 
+        console.log("Name: " + this.state.name)
+        console.log("Length: " + this.state.name.length)
         console.log("over 4: " + (this.state.name.length >= 4));
         console.log("mins in range: " + (this.state.minutes >= 1 && this.state.minutes <= 200));
         console.log("match: " + this.state.minutes.match(/^\d{1,3}$/))
@@ -60,7 +62,8 @@ export default class Form extends Component {
                                 <input
                                     className="input"
                                     type="text"
-                                    /*value={this.state.name}*/
+                                    name="name"
+                                    value={this.state.name}
                                     onChange={this.handleInputChange}
                                     placeholder={suggestedSong}/>
                             </div>
@@ -72,6 +75,7 @@ export default class Form extends Component {
                                 <input
                                     className="input"
                                     type="text"
+                                    name="minutes"
                                     value={this.state.minutes}
                                     onChange={this.handleInputChange}
                                     /*placeholder={defaultMinutes}*//>
