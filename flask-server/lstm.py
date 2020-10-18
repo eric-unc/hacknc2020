@@ -13,8 +13,8 @@ from keras.utils import np_utils
 from keras.callbacks import ModelCheckpoint
 import os, sys
 
-f = ""
 upload_dir = ""
+timing = 0
 
 def train_network():
     """ Train a Neural Network to generate music """
@@ -112,14 +112,9 @@ def create_network(network_input, n_vocab):
     return model
 
 def train(model, network_input, network_output):
-    global f
+    global timing
     """ train the neural network """
-    
-    raw_path = "weights-improvement-{epoch:02d}-{loss:.4f}-bigger.hdf5"
-    
-    filepath = f'./temp/{raw_path}'
-
-    f.write(f'{filepath}\n')
+    filepath = "./temp/temp.hdf5"
 
     checkpoint = ModelCheckpoint(
         filepath,
@@ -130,14 +125,10 @@ def train(model, network_input, network_output):
     )
     callbacks_list = [checkpoint]
 
-    model.fit(network_input, network_output, epochs=200, batch_size=128, callbacks=callbacks_list)
+    model.fit(network_input, network_output, epochs=timing, batch_size=128, callbacks=callbacks_list)
 
 if __name__ == '__main__':
     upload_dir = sys.argv[1]
+    timing = int (sys.argv[2])
     os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
-    f = open("./log", "a")
-    try:
-        train_network()
-    except KeyboardInterrupt:
-        f.close()
-    f.close()
+    train_network()

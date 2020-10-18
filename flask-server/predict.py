@@ -9,7 +9,6 @@ from keras.layers import BatchNormalization as BatchNorm
 from keras.layers import Activation
 import os
 
-f = ""
 
 def generate():
     """ Generate a piano midi file """
@@ -74,7 +73,7 @@ def create_network(network_input, n_vocab):
 
 
     # Load the weights to each node
-    model.load_weights(get_latest_output())
+    model.load_weights("./temp/temp.hdf5")
 
     return model
 
@@ -137,12 +136,6 @@ def create_midi(prediction_output):
 
     midi_stream.write('midi', fp='./result/test_output200.mid')
 
-def get_latest_output():
-    global f
-    return f.readlines[-1][:-1]
-
 if __name__ == '__main__':
-    f = open("./log", "r")
     os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
     generate()
-    f.close()
