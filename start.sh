@@ -1,4 +1,5 @@
 cd react-app
+npm install
 npm run build
 cd ../flask-server
-python main.py
+authbind --deep python3 main.py
