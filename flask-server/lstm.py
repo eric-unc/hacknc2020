@@ -13,7 +13,6 @@ from keras.utils import np_utils
 from keras.callbacks import ModelCheckpoint
 import os, sys
 
-upload_dir = ""
 timing = 0
 
 def train_network():
@@ -30,10 +29,10 @@ def train_network():
     train(model, network_input, network_output)
 
 def get_notes():
-    """ Get all the notes and chords from the midi files in the ./{} directory """.format(upload_dir)
+    """ Get all the notes and chords from the midi files in the ./upload directory """
     notes = []
 
-    for file in glob.glob("{}/*.mid".format(upload_dir)): #loop through all the files
+    for file in glob.glob("./upload/*.mid"): #loop through all the files
         midi = converter.parse(file)
 
         print("Parsing %s" % file)
@@ -128,7 +127,6 @@ def train(model, network_input, network_output):
     model.fit(network_input, network_output, epochs=timing, batch_size=128, callbacks=callbacks_list)
 
 if __name__ == '__main__':
-    upload_dir = sys.argv[1]
-    timing = int(sys.argv[2])
+    timing = int(sys.argv[1])
     os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
     train_network()
