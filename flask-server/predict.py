@@ -135,7 +135,7 @@ def create_midi(prediction_output):
 
     midi_stream = stream.Stream(output_notes)
 
-    midi_stream.write('midi', fp='test_output200.mid')
+    midi_stream.write('midi', fp='./result/test_output200.mid')
 
 def get_latest_output():
     global f
