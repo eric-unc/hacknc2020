@@ -134,4 +134,5 @@ yarn-error.log*
 flask-server/static/
 flask-server/templates/
 flask-server/log
+flask-server/upload/
 
