@@ -9,8 +9,6 @@ from keras.layers import BatchNormalization as BatchNorm
 from keras.layers import Activation
 import os, sys
 
-upload_dir = ""
-
 
 def generate():
     """ Generate a piano midi file """
@@ -106,7 +104,6 @@ def generate_notes(model, network_input, pitchnames, n_vocab):
     return prediction_output
 
 def create_midi(prediction_output):
-    global upload_dir
     """ convert the output from the prediction to notes and create a midi file
         from the notes """
     offset = 0
@@ -137,9 +134,8 @@ def create_midi(prediction_output):
 
     midi_stream = stream.Stream(output_notes)
 
-    midi_stream.write('midi', fp='./result/result_{}.mid'.format(upload_dir))
+    midi_stream.write('midi', fp='./result/result.mid')
 
 if __name__ == '__main__':
     os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
-    upload_dir = sys.argv[1]
     generate()
