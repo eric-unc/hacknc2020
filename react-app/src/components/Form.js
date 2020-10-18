@@ -17,6 +17,17 @@ export default class Form extends Component {
         this.fileInput = React.createRef();
     }
 
+    isInputValid(){
+        // this is hacky af but works lol
+        let ret = this.state.name.length >= 4 &&
+            this.minutes >= 1 && this.minutes <= 200 && this.minutes.match(/^\d{1,3}$/);
+
+        console.log("checked: " + ret)
+        return ret;
+    }
+
+
+
     handleInputChange(event) {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -25,11 +36,15 @@ export default class Form extends Component {
         this.setState({
             [name]: value
         });
+
+        /*if(this.isInputValid())
+            document.getElementById("subForm");*/
     }
 
     handleSubmit(event) {
+        // TODO: call api
         event.preventDefault();
-        console.log(this.state); // TODO: call api
+        console.log(`Selected file - ${this.fileInput.current.files[0].name}`);
     }
 
     render(){
@@ -43,7 +58,7 @@ export default class Form extends Component {
                                 <input
                                     className="input"
                                     type="text"
-                                    value={this.state.value}
+                                    /*value={this.state.name}*/
                                     onChange={this.handleInputChange}
                                     placeholder={suggestedSong}/>
                             </div>
@@ -55,7 +70,7 @@ export default class Form extends Component {
                                 <input
                                     className="input"
                                     type="text"
-                                    value={this.state.value}
+                                    value={this.state.minutes}
                                     onChange={this.handleInputChange}
                                     /*placeholder={defaultMinutes}*//>
                             </div>
@@ -70,7 +85,7 @@ export default class Form extends Component {
 
                         <div class="field">
                             <div className="control">
-                                <button className="button is-link" type="submit">Submit</button>
+                                <button className="button is-link" id="subForm" type="submit" disabled={this.isInputValid()}>Submit</button>
                             </div>
                         </div>
                     </form>
