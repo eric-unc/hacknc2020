@@ -12,7 +12,8 @@ export default class Form extends Component {
         this.state = {
             name: "",
             minutes: defaultMinutes,
-            hasFile: false // This is just to refresh the DOM
+            hasFile: false, // This is just to refresh the DOM
+            isLoading: false
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -24,9 +25,13 @@ export default class Form extends Component {
         // this is hacky af but works lol
         let ret = this.state.name.match(/^[\^\-_.'"&() \w\d]+$/) &&
             this.state.minutes >= 1 && this.state.minutes <= 200 && this.state.minutes.match(/^\d{1,3}$/) &&
-            this.fileInput !== null && this.fileInput.type === "audio/mid";
+            this.fileInput !== null && (this.fileInput.type === "audio/mid" || this.fileInput.type === "application/x-zip-compressed");
 
         return ret;
+    }
+
+    getLoadingClass(){
+        return this.state.isLoading ? "is-loading" : "";
     }
 
     handleInputChange(event) {
@@ -55,9 +60,10 @@ export default class Form extends Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        console.log("About to test this!")
+        console.log("Submitting call")
         if(this.isInputValid()){ // Want to ignore possible DOM screwups and hacks
-            console.log("We tested it!")
+            this.setState({isLoading: true})
+
             const formData = new FormData();
 
             formData.append('name', this.state.name);
@@ -78,8 +84,10 @@ export default class Form extends Component {
             })
 
             axios.post("./get-file").then((res) => {
-                console.log(res);
+
             });
+
+            //this.setState({isLoading: false})
         }
     }
 
@@ -116,7 +124,7 @@ export default class Form extends Component {
                         </div>
 
                         <div className="field">
-                            <label className="label">Input (must be a <code>mid</code> file)</label>
+                            <label className="label">Input (must be a <code>mid</code> or <code>zip</code> file)</label>
                             <div className="file is-primary">
                                 <input
                                     type="file"
@@ -127,7 +135,11 @@ export default class Form extends Component {
 
                         <div class="field">
                             <div className="control">
-                                <button className="button is-link" type="submit" disabled={!this.isInputValid()}>Submit</button>
+                                <button
+                                    className={"button is-link " + this.getLoadingClass()}
+                                    type="submit"
+                                    disabled={!this.isInputValid()}
+                                >Submit</button>
                             </div>
                         </div>
                     </form>
