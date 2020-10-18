@@ -16,6 +16,7 @@ export default class Form extends Component {
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.fileInput = null;
     }
 
@@ -56,7 +57,7 @@ export default class Form extends Component {
 
         console.log("About to test this!")
         if(this.isInputValid()){ // Want to ignore possible DOM screwups and hacks
-            console.log("")
+            console.log("We tested it!")
             const formData = new FormData();
 
             formData.append('name', this.state.name);
