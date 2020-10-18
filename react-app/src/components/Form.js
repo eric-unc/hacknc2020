@@ -20,13 +20,14 @@ export default class Form extends Component {
     isInputValid(){
         // this is hacky af but works lol
         let ret = this.state.name.length >= 4 &&
-            this.minutes >= 1 && this.minutes <= 200 && this.minutes.match(/^\d{1,3}$/);
+            this.state.minutes >= 1 && this.state.minutes <= 200 && this.state.minutes.match(/^\d{1,3}$/);
 
-        console.log("checked: " + ret)
+        console.log("over 4: " + (this.state.name.length >= 4));
+        console.log("mins in range: " + (this.state.minutes >= 1 && this.state.minutes <= 200));
+        console.log("match: " + this.state.minutes.match(/^\d{1,3}$/))
+        console.log("checked: " + ret);
         return ret;
     }
-
-
 
     handleInputChange(event) {
         const target = event.target;
@@ -36,6 +37,7 @@ export default class Form extends Component {
         this.setState({
             [name]: value
         });
+        console.log("" + name + " -> " + value);
 
         /*if(this.isInputValid())
             document.getElementById("subForm");*/
@@ -85,7 +87,7 @@ export default class Form extends Component {
 
                         <div class="field">
                             <div className="control">
-                                <button className="button is-link" id="subForm" type="submit" disabled={this.isInputValid()}>Submit</button>
+                                <button className="button is-link" type="submit" disabled={!this.isInputValid()}>Submit</button>
                             </div>
                         </div>
                     </form>
