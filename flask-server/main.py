@@ -57,4 +57,4 @@ def begin_transfer():
 def get_file():
     return send_file(f'./result/result_{time_stamp}', attachment_filename = 'result.mid')
 
-app.run(debug=True)
+app.run(host="0.0.0.0", port=80, debug=True)
