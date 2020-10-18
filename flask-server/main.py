@@ -39,7 +39,8 @@ def post_file():
     # post time
     try:
         os.system(f'unzip ./upload/*.zip')
-        os.system(f'rm -rf .//*.zip')
+        os.system(f'rm -rf ./upload/*.zip')
+        os.system('mv ./zipped_file ./upload/')
     except e:
         print(e)
     timing = request.form['time']           # should be same as name field in <input>
